@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 import "../styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { HeroHeader } from "@/components/layout/header";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -19,24 +20,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <>
-      <html lang="en" suppressHydrationWarning>
-        <head />
-        <body className={`${geistMono.variable} font-mono`}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </body>
-      </html>
-    </>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${geistMono.variable} font-mono`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <HeroHeader />
+          <main className="pt-36 pb-36">{children}</main>
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }

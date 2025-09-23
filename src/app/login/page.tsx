@@ -56,6 +56,21 @@ export default function LoginPage() {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center bg-background text-foreground">
+      {/* Background Gradient using CSS class */}
+        {/* White Grid with Dots Background */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px),
+              radial-gradient(circle, rgba(51,65,85,0.4) 1px, transparent 1px)
+            `,
+            backgroundSize: "20px 20px, 20px 20px, 20px 20px",
+            backgroundPosition: "0 0, 0 0, 0 0",
+          }}
+        />
+
       <form className="w-full max-w-sm z-10" onSubmit={handleLogin}>
         <Card>
           <CardHeader>
