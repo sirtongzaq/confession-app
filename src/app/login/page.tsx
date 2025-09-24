@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -14,20 +14,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircleIcon } from "lucide-react";
+import { toast } from "sonner";
 
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
-    setShowAlert(false);
 
     try {
       const res = await fetch("/api/auth/login", {
@@ -37,20 +32,15 @@ export default function LoginPage() {
       });
 
       if (!res.ok) {
-        const data = await res.json();
-        setError(data.message || "Login failed");
-        setShowAlert(true);
-
-        setTimeout(() => setShowAlert(false), 5000);
+        toast.error("Login failed")
         return;
       }
 
+      toast.success(`Welcome back! @${email}`)
       router.push("/");
     } catch (err) {
-      setError("Something went wrong");
-      setShowAlert(true);
-      setTimeout(() => setShowAlert(false), 5000);
       console.log(err);
+      toast.error("Something went wrong")
     }
   };
 
@@ -125,21 +115,6 @@ export default function LoginPage() {
           </CardFooter>
         </Card>
       </form>
-
-      <div
-        className={`absolute top-8 right-8 w-80 z-50 transition-all duration-500
-    ${
-      error && showAlert
-        ? "opacity-100 translate-y-0"
-        : "opacity-0 -translate-y-4 pointer-events-none"
-    }`}
-      >
-        <Alert variant="destructive">
-          <AlertCircleIcon className="mr-2" />
-          <AlertTitle>Login Failed</AlertTitle>
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
-      </div>
     </div>
   );
 }

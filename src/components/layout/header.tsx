@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import {
   Menu,
@@ -8,7 +9,6 @@ import {
   Settings,
   Home,
   Tag,
-  Bell,
   Flame,
 } from "lucide-react";
 import React from "react";
@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { ModeToggle } from "./toggle-theme";
 import { AvatarToggle } from "./toggle-avatar";
+import { NotificationToggle } from "./toggle-notification";
 
 const menuItems = [
   { name: "Feed", href: "/", icon: <Home className="h-4 w-4 mr-1" /> },
@@ -25,12 +26,6 @@ const menuItems = [
     icon: <Flame className="h-4 w-4 mr-1" />,
   },
   { name: "Tags", href: "/tags", icon: <Tag className="h-4 w-4 mr-1" /> },
-  {
-    name: "Notifications",
-    href: "/notifications",
-    icon: <Bell className="h-4 w-4 mr-1" />,
-    count: 3,
-  },
 ];
 
 const userMenuItems = [
@@ -51,9 +46,13 @@ const userMenuItems = [
   },
 ];
 
-const notificationCount = 3;
+const notifications = [
+  { id: 1, text: "มีคนกด ❤️ ใน Confession ของคุณ" },
+  { id: 2, text: "มีคนแสดงความคิดเห็นใหม่" },
+  { id: 3, text: "Confession ของคุณติด Trending!" },
+];
 
-export const HeroHeader = () => {
+export const HeaderBar = () => {
   const [menuState, setMenuState] = React.useState(false);
   const [isScrolled, setIsScrolled] = React.useState(false);
 
@@ -64,6 +63,7 @@ export const HeroHeader = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   return (
     <header>
       <nav
@@ -78,6 +78,7 @@ export const HeroHeader = () => {
           )}
         >
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
+            {/* Logo + Mobile Menu */}
             <div className="flex w-full justify-between lg:w-auto">
               <Link
                 href="/"
@@ -112,16 +113,11 @@ export const HeroHeader = () => {
                         : "scale-0 opacity-0 -rotate-180"
                     }`}
                   />
-                  {/* Notification Badge */}
-                  {notificationCount > 0 && (
-                    <span className="absolute -top-1 -right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-[10px] font-bold leading-none text-white bg-red-500 rounded-full">
-                      {notificationCount}
-                    </span>
-                  )}
                 </div>
               </button>
             </div>
 
+            {/* Desktop Menu */}
             <div className="absolute inset-0 m-auto hidden size-fit lg:block">
               <ul className="flex gap-8 text-sm">
                 {menuItems.map((item, index) => (
@@ -132,18 +128,13 @@ export const HeroHeader = () => {
                     >
                       {item.icon}
                       <span>{item.name}</span>
-
-                      {item.count && (
-                        <span className="ml-1 inline-flex items-center justify-center px-1.5 py-0.5 text-[10px] font-bold leading-none text-white bg-red-500 rounded-full">
-                          {item.count}
-                        </span>
-                      )}
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
 
+            {/* Right Section */}
             <div className="bg-background in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
               <div className="lg:hidden">
                 <ul className="space-y-6 text-base">
@@ -155,19 +146,15 @@ export const HeroHeader = () => {
                       >
                         {item.icon}
                         <span>{item.name}</span>
-
-                        {item.count && (
-                          <span className="ml-1 inline-flex items-center justify-center px-1.5 py-0.5 text-[10px] font-bold leading-none text-white bg-red-500 rounded-full">
-                            {item.count}
-                          </span>
-                        )}
                       </Link>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit items-center">
+
+              <div className="flex w-full flex-row items-center justify-center gap-3 md:w-fit">
                 <AvatarToggle userMenuItems={userMenuItems} />
+                <NotificationToggle notifications={notifications} />
                 <ModeToggle />
               </div>
             </div>
