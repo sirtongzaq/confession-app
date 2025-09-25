@@ -32,22 +32,17 @@ const initialConfessions: Confession[] = Array.from({ length: 12 }, (_, i) => ({
   id: i + 1,
   username: `User${i + 1}`,
   avatar: `https://i.pravatar.cc/40?img=${i + 1}`,
-  text: `นี่คือความลับหมายเลข ${
-    i + 1
-  }. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sed.`,
+  text: `นี่คือความลับหมายเลข ${i + 1}. Lorem ipsum dolor sit amet.`,
   tags: ["#funny", "#work", "#secret"].slice(0, (i % 3) + 1),
-  likes: Math.floor(Math.random() * 50),
-  dislikes: Math.floor(Math.random() * 10),
-  comments: Math.floor(Math.random() * 20),
-  commentList: Array.from(
-    { length: Math.floor(Math.random() * 5) + 1 },
-    (_, j) => ({
-      id: j + 1,
-      username: `Commenter${j + 1}`,
-      avatar: `https://i.pravatar.cc/32?img=${((i + j) % 70) + 1}`,
-      text: `นี่คือคอมเมนต์ที่ ${j + 1} ของความลับหมายเลข ${i + 1}`,
-    })
-  ),
+  likes: (i * 3) % 50,       // deterministic formula
+  dislikes: (i * 2) % 10,    // deterministic formula
+  comments: (i * 5) % 20,    // deterministic formula
+  commentList: Array.from({ length: (i % 5) + 1 }, (_, j) => ({
+    id: j + 1,
+    username: `Commenter${j + 1}`,
+    avatar: `https://i.pravatar.cc/32?img=${((i + j) % 70) + 1}`,
+    text: `นี่คือคอมเมนต์ที่ ${j + 1} ของความลับหมายเลข ${i + 1}`,
+  })),
 }));
 
 export default function FeedPage() {

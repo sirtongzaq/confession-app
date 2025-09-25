@@ -20,7 +20,7 @@ export function ConfessionModalContent({
 }: ConfessionModalContentProps) {
   return (
     <div className="p-4 flex flex-col gap-3">
-      <p className="text-sm text-foreground/90 line-clamp-4">{text}</p>
+      <div className="text-sm text-foreground/90" dangerouslySetInnerHTML={{ __html: text }} />
 
       <div className="flex flex-wrap gap-2">
         {tags.map((tag, i) => (
