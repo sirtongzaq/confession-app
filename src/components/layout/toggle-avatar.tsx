@@ -12,6 +12,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { LogOut } from "lucide-react";
+import { ModeToggle } from "./toggle-theme";
 
 export interface UserMenuItem {
   name: string;
@@ -67,6 +68,10 @@ export function AvatarToggle({ userMenuItems }: AvatarToggleProps) {
             </Link>
           </DropdownMenuItem>
         ))}
+
+        <div className="items-center justify-center justify-items-center justify-self-center p-2">
+          <ModeToggle />
+        </div>
 
         <DropdownMenuSeparator className="bg-white/20" />
         <DropdownMenuItem

@@ -15,7 +15,7 @@ export function ConfessionModalCommentInput({
   handleAddComment,
 }: ConfessionModalCommentInputProps) {
   return (
-    <div className="mt-4 flex flex-col gap-2">
+    <div className="flex flex-col gap-2 p-2">
       <Textarea
         placeholder="Write a comment..."
         value={newComment}
@@ -31,7 +31,7 @@ export function ConfessionModalCommentInput({
       />
       <Button
         onClick={handleAddComment}
-        className="self-end rounded-full px-5 bg-primary text-primary-foreground shadow-md hover:shadow-lg hover:bg-primary/90"
+        className="self-end rounded-md px-5 bg-primary text-primary-foreground shadow-md hover:shadow-lg hover:bg-primary/90"
       >
         Send
       </Button>

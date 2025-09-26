@@ -19,8 +19,18 @@ export function ConfessionModalContent({
   comments,
 }: ConfessionModalContentProps) {
   return (
-    <div className="p-4 flex flex-col gap-3">
-      <div className="text-sm text-foreground/90" dangerouslySetInnerHTML={{ __html: text }} />
+    <div className="p-2 flex flex-col gap-3">
+      <div
+        className="
+          text-sm text-foreground/90 
+          break-all
+          whitespace-pre-wrap 
+          overflow-y-auto
+          leading-relaxed
+          max-h-[50vh]
+        "
+        dangerouslySetInnerHTML={{ __html: text }}
+      />
 
       <div className="flex flex-wrap gap-2">
         {tags.map((tag, i) => (

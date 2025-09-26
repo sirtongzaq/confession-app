@@ -41,7 +41,7 @@ export function Toolbar() {
   return (
     <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 p-2">
       {/* Left group: Text formatting */}
-      <div className="flex flex-wrap gap-1 md:flex-row md:flex-nowrap ">
+      <div className="flex flex-wrap gap-1">
         <Toggle
           value="bold"
           aria-label="Bold"

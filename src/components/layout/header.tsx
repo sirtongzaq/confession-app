@@ -14,7 +14,6 @@ import {
 import React from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { ModeToggle } from "./toggle-theme";
 import { AvatarToggle } from "./toggle-avatar";
 import { NotificationToggle } from "./toggle-notification";
 
@@ -93,28 +92,32 @@ export const HeaderBar = () => {
                 />
               </Link>
 
-              <button
-                onClick={() => setMenuState(!menuState)}
-                aria-label={menuState ? "Close Menu" : "Open Menu"}
-                className="relative z-20 block p-2.5 lg:hidden"
-              >
-                <div className="relative w-6 h-6">
-                  <Menu
-                    className={`absolute inset-0 m-auto size-6 transition duration-200 ${
-                      menuState
-                        ? "scale-0 opacity-0 rotate-180"
-                        : "scale-100 opacity-100 rotate-0"
-                    }`}
-                  />
-                  <X
-                    className={`absolute inset-0 m-auto size-6 transition duration-200 ${
-                      menuState
-                        ? "scale-100 opacity-100 rotate-0"
-                        : "scale-0 opacity-0 -rotate-180"
-                    }`}
-                  />
-                </div>
-              </button>
+              <div className="relative z-20 p-2.5 flex flex-row items-center justify-center gap-3 md:w-fit lg:hidden">
+                <NotificationToggle notifications={notifications} />
+                <AvatarToggle userMenuItems={userMenuItems} />
+                <button
+                  onClick={() => setMenuState(!menuState)}
+                  aria-label={menuState ? "Close Menu" : "Open Menu"}
+                  className=""
+                >
+                  <div className="relative w-6 h-6">
+                    <Menu
+                      className={`absolute inset-0 m-auto size-6 transition duration-200 ${
+                        menuState
+                          ? "scale-0 opacity-0 rotate-180"
+                          : "scale-100 opacity-100 rotate-0"
+                      }`}
+                    />
+                    <X
+                      className={`absolute inset-0 m-auto size-6 transition duration-200 ${
+                        menuState
+                          ? "scale-100 opacity-100 rotate-0"
+                          : "scale-0 opacity-0 -rotate-180"
+                      }`}
+                    />
+                  </div>
+                </button>
+              </div>
             </div>
 
             {/* Desktop Menu */}
@@ -134,7 +137,7 @@ export const HeaderBar = () => {
               </ul>
             </div>
 
-            {/* Right Section */}
+            {/* Right Section - Mobile */}
             <div className="bg-background in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
               <div className="lg:hidden">
                 <ul className="space-y-6 text-base">
@@ -145,18 +148,18 @@ export const HeaderBar = () => {
                         className="flex items-center text-muted-foreground hover:text-accent-foreground duration-150"
                       >
                         {item.icon}
-                        <span>{item.name}</span>
+                        <span>{item.name + "1111"}</span>
                       </Link>
                     </li>
                   ))}
                 </ul>
               </div>
+            </div>
 
-              <div className="flex w-full flex-row items-center justify-center gap-3 md:w-fit">
-                <AvatarToggle userMenuItems={userMenuItems} />
-                <NotificationToggle notifications={notifications} />
-                <ModeToggle />
-              </div>
+            {/* Right Section - Desktop */}
+            <div className="hidden lg:flex flex-row items-center justify-center gap-3 w-fit">
+              <NotificationToggle notifications={notifications} />
+              <AvatarToggle userMenuItems={userMenuItems} />
             </div>
           </div>
         </div>

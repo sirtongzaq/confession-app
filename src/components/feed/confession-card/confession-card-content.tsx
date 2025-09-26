@@ -21,7 +21,16 @@ export function ConfessionCardContent({
 }: ConfessionCardContentProps) {
   return (
     <CardContent className="p-4 flex flex-col gap-3">
-      <div className="text-sm text-foreground/90 line-clamp-4" dangerouslySetInnerHTML={{ __html: text }} />
+      <div
+        className=" text-sm text-foreground/90 
+          w-full 
+          break-all 
+          whitespace-pre-wrap 
+          overflow-hidden
+          leading-relaxed 
+          line-clamp-5"
+        dangerouslySetInnerHTML={{ __html: text }}
+      />
 
       <div className="flex flex-wrap gap-2">
         {tags.map((tag, i) => (

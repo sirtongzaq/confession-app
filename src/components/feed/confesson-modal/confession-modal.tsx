@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Dialog,
   DialogContent,
@@ -12,6 +11,7 @@ import {
 import { ConfessionModalContent } from "./confession-modal-content";
 import { ConfessionModalCommentList } from "./confession-modal-comment-list";
 import { ConfessionModalCommentInput } from "./confession-modal-comment-input";
+import { ConfessionModalHeader } from "./confession-modal-header";
 
 interface Comment {
   id: number;
@@ -63,14 +63,8 @@ export function ConfessionModal({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-lg rounded-2xl border border-border/50 bg-background/70 backdrop-blur-md shadow-lg">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2 text-foreground">
-            <Avatar className="h-8 w-8 ring-2 ring-primary/30">
-              <AvatarImage src={confession.avatar} alt={confession.username} />
-              <AvatarFallback>
-                {confession.username[0].toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
-            {confession.username} Confession
+          <DialogTitle className="flex items-center gap-2 text-foreground border-b border-border/50 p-4">
+            <ConfessionModalHeader username={confession.username} avatar={confession.avatar} />
           </DialogTitle>
         </DialogHeader>
 

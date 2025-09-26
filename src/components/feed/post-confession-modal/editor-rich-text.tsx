@@ -26,11 +26,20 @@ export function EditorRichText({
   };
 
   return (
-    <div onKeyDown={handleKeyDown} className="relative border border-border/30 backdrop-blur-md bg-background/50 w-full flex-1 min-h-[150px] max-h-[70vh] overflow-y-auto rounded-md px-2.5 py-2">
+    <div
+      onKeyDown={handleKeyDown}
+      className="relative border border-border/30 backdrop-blur-md bg-background/50 w-full flex-1 min-h-[150px] max-h-[70vh] overflow-y-auto px-2.5 py-2"
+    >
       <RichTextPlugin
-        contentEditable={<ContentEditable className="min-h-full w-full outline-none" />}
+        contentEditable={
+          <ContentEditable
+            className="min-h-full w-full max-w-full outline-none 
+             whitespace-pre-wrap break-all leading-relaxed
+             text-sm"
+          />
+        }
         placeholder={
-          <div className="absolute top-2 left-3 text-muted-foreground select-none">
+          <div className="absolute top-2 left-3 text-muted-foreground select-none text-sm">
             Write your confession...
           </div>
         }
