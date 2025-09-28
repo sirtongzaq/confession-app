@@ -1,15 +1,17 @@
 "use client";
 
-import { Geist_Mono } from "next/font/google";
+import { Mitr } from "next/font/google";
 import "../styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { HeaderBar } from "@/components/layout/header";
 import { usePathname } from "next/navigation";
 import { Toaster } from "@/components/ui/sonner";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+// Import ฟอนต์ Mitr
+const mitr = Mitr({
+  variable: "--font-mitr",
+  subsets: ["latin", "thai"],
+  weight: ["300", "400", "500", "600"],
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -20,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistMono.variable} font-mono`}>
+      <body className={`${mitr.variable} font-sans`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

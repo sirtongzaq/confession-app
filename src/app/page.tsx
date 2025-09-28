@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { FabButton } from "@/components/feed/fab-button";
 import { PostConfessionModal } from "@/components/feed/post-confession-modal/post-confession-modal";
 import { SlidingNumberBasic } from "@/components/feed/sliding-number-basic";
+import { nanoid } from "nanoid";
 
 interface Comment {
   id: number;
@@ -16,7 +17,7 @@ interface Comment {
 }
 
 interface Confession {
-  id: number;
+  id: string;
   username: string;
   avatar: string;
   text: string;
@@ -29,7 +30,7 @@ interface Confession {
 
 // ตัวอย่างข้อมูล
 const initialConfessions: Confession[] = Array.from({ length: 12 }, (_, i) => ({
-  id: i + 1,
+  id: nanoid(),
   username: `User${i + 1}`,
   avatar: `https://i.pravatar.cc/40?img=${i + 1}`,
   text: `นี่คือความลับหมายเลข ${i + 1}. Lorem ipsum dolor sit amet.`,
@@ -57,7 +58,7 @@ export default function FeedPage() {
     setLoading(true);
     setTimeout(() => {
       const more = Array.from({ length: 6 }, (_, i) => ({
-        id: confessions.length + i + 1,
+        id: nanoid(),
         username: `User${confessions.length + i + 1}`,
         avatar: `https://i.pravatar.cc/40?img=${(confessions.length + i) % 70}`,
         text: `นี่คือความลับหมายเลข ${
@@ -175,7 +176,7 @@ export default function FeedPage() {
           setOpen={setOpenModal}
           onSubmit={(text, tags) => {
             const newConfession = {
-              id: confessions.length + 1,
+              id: nanoid(),
               username: "You",
               avatar: "https://i.pravatar.cc/40?u=new",
               text,

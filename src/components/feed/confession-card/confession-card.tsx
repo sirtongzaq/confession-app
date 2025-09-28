@@ -15,7 +15,7 @@ interface Comment {
 
 interface ConfessionCardProps {
   confession: {
-    id: number;
+    id: string;
     username: string;
     avatar: string;
     text: string;
