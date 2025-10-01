@@ -8,25 +8,7 @@ import { FabButton } from "@/components/feed/fab-button";
 import { PostConfessionModal } from "@/components/feed/post-confession-modal/post-confession-modal";
 import { SlidingNumberBasic } from "@/components/feed/sliding-number-basic";
 import { nanoid } from "nanoid";
-
-interface Comment {
-  id: number;
-  username: string;
-  avatar: string;
-  text: string;
-}
-
-interface Confession {
-  id: string;
-  username: string;
-  avatar: string;
-  text: string;
-  tags: string[];
-  likes: number;
-  dislikes: number;
-  comments: number;
-  commentList?: Comment[];
-}
+import { Confession } from "@/type";
 
 // ตัวอย่างข้อมูล
 const initialConfessions: Confession[] = Array.from({ length: 12 }, (_, i) => ({
@@ -35,9 +17,9 @@ const initialConfessions: Confession[] = Array.from({ length: 12 }, (_, i) => ({
   avatar: `https://i.pravatar.cc/40?img=${i + 1}`,
   text: `นี่คือความลับหมายเลข ${i + 1}. Lorem ipsum dolor sit amet.`,
   tags: ["#funny", "#work", "#secret"].slice(0, (i % 3) + 1),
-  likes: (i * 3) % 50,       // deterministic formula
-  dislikes: (i * 2) % 10,    // deterministic formula
-  comments: (i * 5) % 20,    // deterministic formula
+  likes: (i * 3) % 50, // deterministic formula
+  dislikes: (i * 2) % 10, // deterministic formula
+  comments: (i * 5) % 20, // deterministic formula
   commentList: Array.from({ length: (i % 5) + 1 }, (_, j) => ({
     id: j + 1,
     username: `Commenter${j + 1}`,
@@ -80,6 +62,10 @@ export default function FeedPage() {
             text: `นี่คือคอมเมนต์ที่ ${j + 1} ของความลับหมายเลข ${i + 1}`,
           })
         ),
+        imageUrl: [
+          `https://picsum.photos/id/${confessions.length + i + 1}/1080`,
+          `https://picsum.photos/id/${confessions.length + i + 2}/1080`,
+        ],
       }));
       setConfessions((prev) => [...prev, ...more]);
       setLoading(false);
@@ -175,7 +161,7 @@ export default function FeedPage() {
           open={openModal}
           setOpen={setOpenModal}
           onSubmit={(text, tags) => {
-            const newConfession = {
+            const newConfession: Confession = {
               id: nanoid(),
               username: "You",
               avatar: "https://i.pravatar.cc/40?u=new",
@@ -185,6 +171,10 @@ export default function FeedPage() {
               dislikes: 0,
               comments: 0,
               commentList: [],
+              imageUrl: [
+                `https://picsum.photos/id/${1}/1080`,
+                `https://picsum.photos/id/${2}/1080`,
+              ],
             };
             setConfessions([newConfession, ...confessions]);
           }}

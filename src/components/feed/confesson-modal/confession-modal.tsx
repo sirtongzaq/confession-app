@@ -12,25 +12,8 @@ import { ConfessionModalContent } from "./confession-modal-content";
 import { ConfessionModalCommentList } from "./confession-modal-comment-list";
 import { ConfessionModalCommentInput } from "./confession-modal-comment-input";
 import { ConfessionModalHeader } from "./confession-modal-header";
-
-interface Comment {
-  id: number;
-  username: string;
-  avatar: string;
-  text: string;
-}
-
-interface Confession {
-  id: string;
-  username: string;
-  avatar: string;
-  text: string;
-  tags: string[];
-  likes: number;
-  dislikes: number;
-  comments: number;
-  commentList?: Comment[];
-}
+import { Comment, Confession } from "@/type";
+import { useRouter } from "next/navigation";
 
 interface ConfessionModalProps {
   confession: Confession;
@@ -41,6 +24,8 @@ export function ConfessionModal({
   confession,
   children,
 }: ConfessionModalProps) {
+  const router = useRouter();
+
   const [commentList, setCommentList] = React.useState(
     confession.commentList || []
   );
@@ -61,22 +46,31 @@ export function ConfessionModal({
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-lg rounded-2xl border border-border/50 bg-background/70 backdrop-blur-md shadow-lg">
+      <DialogContent
+        className="sm:max-w-lg rounded-2xl border border-border/50 bg-background/70 backdrop-blur-md shadow-lg"
+        onMaximize={() => router.push(`/confession/${confession.id}`)}
+      >
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-foreground border-b border-border/50 p-4">
-            <ConfessionModalHeader username={confession.username} avatar={confession.avatar} />
+            <ConfessionModalHeader
+              username={confession.username}
+              avatar={confession.avatar}
+            />
           </DialogTitle>
         </DialogHeader>
 
-        <ConfessionModalContent
-          text={confession.text}
-          tags={confession.tags}
-          likes={confession.likes}
-          dislikes={confession.dislikes}
-          comments={confession.comments}
-        />
+        <div className="flex-1 overflow-y-auto max-h-[50vh]">
+          <ConfessionModalContent
+            text={confession.text}
+            tags={confession.tags}
+            likes={confession.likes}
+            dislikes={confession.dislikes}
+            comments={confession.comments}
+            imageUrl={confession.imageUrl}
+          />
 
-        <ConfessionModalCommentList commentList={commentList} />
+          <ConfessionModalCommentList commentList={commentList} />
+        </div>
 
         <ConfessionModalCommentInput
           newComment={newComment}

@@ -1,17 +1,16 @@
 "use client";
 
-import { Mitr } from "next/font/google";
+import { Inter } from "next/font/google";
 import "../styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { HeaderBar } from "@/components/layout/header";
 import { usePathname } from "next/navigation";
 import { Toaster } from "@/components/ui/sonner";
 
-// Import ฟอนต์ Mitr
-const mitr = Mitr({
-  variable: "--font-mitr",
-  subsets: ["latin", "thai"],
-  weight: ["300", "400", "500", "600"],
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -22,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${mitr.variable} font-sans`}>
+      <body className={`${inter.variable} font-sans`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

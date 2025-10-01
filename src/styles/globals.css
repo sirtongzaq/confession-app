@@ -134,7 +134,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--primary-foreground);
+  background-color: var(--border);
 }
 
 ::-webkit-scrollbar-track {

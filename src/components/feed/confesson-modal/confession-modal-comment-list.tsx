@@ -1,13 +1,7 @@
 "use client";
 import * as React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
-interface Comment {
-  id: number;
-  username: string;
-  avatar: string;
-  text: string;
-}
+import { Comment } from "@/type";
 
 interface ConfessionModalCommentListProps {
   commentList: Comment[];

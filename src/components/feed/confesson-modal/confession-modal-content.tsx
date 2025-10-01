@@ -2,13 +2,16 @@
 import * as React from "react";
 import { Badge } from "@/components/ui/badge";
 import { ReactionModalButtons } from "./reaction-modal-buttons";
+import { Confession } from "@/type";
+import { ImagePreview } from "../image-view/image-preview";
 
 interface ConfessionModalContentProps {
-  text: string;
-  tags: string[];
-  likes: number;
-  dislikes: number;
-  comments: number;
+  text: Confession["text"];
+  tags: Confession["tags"];
+  likes: Confession["likes"];
+  dislikes: Confession["dislikes"];
+  comments: Confession["comments"];
+  imageUrl: Confession["imageUrl"];
 }
 
 export function ConfessionModalContent({
@@ -17,6 +20,7 @@ export function ConfessionModalContent({
   likes,
   dislikes,
   comments,
+  imageUrl,
 }: ConfessionModalContentProps) {
   return (
     <div className="p-2 flex flex-col gap-3">
@@ -27,10 +31,11 @@ export function ConfessionModalContent({
           whitespace-pre-wrap 
           overflow-y-auto
           leading-relaxed
-          max-h-[50vh]
         "
         dangerouslySetInnerHTML={{ __html: text }}
       />
+
+      <ImagePreview images={imageUrl ? imageUrl : []} />
 
       <div className="flex flex-wrap gap-2">
         {tags.map((tag, i) => (

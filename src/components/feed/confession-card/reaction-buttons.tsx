@@ -1,11 +1,12 @@
 "use client";
 import * as React from "react";
 import { Heart, HeartMinus, MessageCircle } from "lucide-react";
+import { Confession } from "@/type";
 
 interface ReactionButtonsProps {
-  likes: number;
-  dislikes: number;
-  comments: number;
+  likes: Confession["likes"];
+  dislikes: Confession["dislikes"];
+  comments: Confession["comments"];
 }
 
 export function ReactionButtons({

@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { XIcon } from "lucide-react"
+import {  Maximize2Icon, XIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -46,14 +46,19 @@ function DialogOverlay({
   )
 }
 
+interface DialogContentProps
+  extends React.ComponentProps<typeof DialogPrimitive.Content> {
+  showCloseButton?: boolean;
+  onMaximize?: () => void; // new prop
+}
+
 function DialogContent({
   className,
   children,
   showCloseButton = true,
+  onMaximize,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Content> & {
-  showCloseButton?: boolean
-}) {
+}: DialogContentProps) {
   return (
     <DialogPortal data-slot="dialog-portal">
       <DialogOverlay />
@@ -66,6 +71,17 @@ function DialogContent({
         {...props}
       >
         {children}
+
+        {onMaximize && (
+          <button
+            onClick={onMaximize}
+            className="absolute top-3.5 right-12 rounded-xs p-1 opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring"
+          >
+            <Maximize2Icon className="w-3 h-3" />
+            <span className="sr-only">Maximize</span>
+          </button>
+        )}
+
         {showCloseButton && (
           <DialogPrimitive.Close
             data-slot="dialog-close"

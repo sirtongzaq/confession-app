@@ -1,10 +1,11 @@
 "use client";
 import * as React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Confession } from "@/type";
 
 interface ConfessionModalHeaderProps {
-  username: string;
-  avatar: string;
+  username: Confession['username'];
+  avatar: Confession['avatar'];
 }
 
 export function ConfessionModalHeader({

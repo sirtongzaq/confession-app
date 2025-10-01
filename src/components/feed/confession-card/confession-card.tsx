@@ -5,26 +5,10 @@ import { ConfessionCardHeader } from "./confession-card-header";
 import { ConfessionCardContent } from "./confession-card-content";
 import { ConfessionModal } from "../confesson-modal/confession-modal";
 import { InView } from "../../../../components/motion-primitives/in-view";
-
-interface Comment {
-  id: number;
-  username: string;
-  avatar: string;
-  text: string;
-}
+import { Confession } from "@/type";
 
 interface ConfessionCardProps {
-  confession: {
-    id: string;
-    username: string;
-    avatar: string;
-    text: string;
-    tags: string[];
-    likes: number;
-    dislikes: number;
-    comments: number;
-    commentList?: Comment[];
-  };
+  confession: Confession;
 }
 
 export function ConfessionCard({ confession }: ConfessionCardProps) {
@@ -56,6 +40,7 @@ export function ConfessionCard({ confession }: ConfessionCardProps) {
             likes={confession.likes}
             dislikes={confession.dislikes}
             comments={confession.comments}
+            imageUrl={confession.imageUrl}
           />
         </Card>
       </ConfessionModal>
